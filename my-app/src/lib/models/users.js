@@ -6,25 +6,30 @@ function gettime(date) {
     var day = String(date.getDate()).padStart(2, "0");
     var hour = String(date.getHours()).padStart(2, "0");
     var minute = String(date.getMinutes()).padStart(2, "0");
-    var second = String(date.getSeconds()).padStart(2, "0");
-    return `${year}${month}${day} ${hour}${minute}${second}`;
+    return `${year}${month}${day} ${hour}${minute}`;
 }
 
 const UserSchema = new mongoose.Schema(
     {
+        username: { type: String, required: true },
         passwordHash: { type: String, required: true },
         role: { type: String, required: true, enum: ['student', 'faculty'] },
         files: [
             {
-                title: {
+                fileName: {
                     type: String,
                     required: true,
                     default: '',
                 },
-                fileHash: {
+                previewImage: {
                     type: String,
                     required: true,
+                    default: '',
                 },
+                tags: {
+                    type: [String],
+                    default: [],
+                }
             }
         ],
         tags: {
